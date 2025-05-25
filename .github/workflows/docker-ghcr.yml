@@ -1,5 +1,4 @@
 name: Build and Push Docker Image to GHCR
-
 on:
   push:
     branches: [main]
@@ -23,10 +22,14 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Set Image Tag with Date and Time
+      id: vars
+      run: echo "tag=$(date +'%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+
     - name: Build Docker Image
       run: |
-        docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} -f python_app/dockerfile .
+        docker build -t ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.tag }} .
 
     - name: Push Docker Image
       run: |
-        docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
+        docker push ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.tag }}
