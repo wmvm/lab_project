@@ -28,7 +28,7 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.tag }} .
+        docker build -t ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.tag }} -f python_app/Dockerfile .
 
     - name: Push Docker Image
       run: |
