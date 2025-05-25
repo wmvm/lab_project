@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy app files
-COPY lab_app.py .
+COPY python_app/lab_app.py .
 
 # Install Flask
 RUN pip install flask
