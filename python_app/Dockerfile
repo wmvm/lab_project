@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy app files
-COPY python_app/* .
+COPY python_app/lab_app.py  python_app/requirements.txt ./
 
 # Install requirements
 RUN pip install --no-cache-dir -r requirements.txt
